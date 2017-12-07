@@ -1,0 +1,8 @@
+#!/bin/bash
+
+DATABASES=( $@ )
+
+for db in "${DATABASES[@]}"
+do
+  /usr/bin/mysqldump $db | /bin/gzip | /usr/bin/gpg2 --batch --passphrase-file {{secret}}/backups/pass.txt -c > {{backups}}/{{inventory_hostname}}/mariadb/$db.sql.gz.gpg
+done

@@ -1,0 +1,25 @@
+---
+
+#
+# Cryptographic dependencies are managed in the backups-role
+#
+
+- name: Deploy backup cronjob
+  template:
+    src:   mariadb_cron.j2
+    dest:  /etc/cron.d/mariadb_backup
+    owner: root
+    group: root
+    mode:  0640
+  become: yes
+
+- name: Deploy backup script
+  template:
+    src:   mariadb_backups.sh.j2
+    dest:  /usr/local/bin/mariadb_backups.sh
+    owner: root
+    group: root
+    mode:  0555
+  become: yes
+
+

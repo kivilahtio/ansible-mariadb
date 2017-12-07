@@ -1,0 +1,3 @@
+10 04 * * *     root     /usr/local/bin/mariadb_backups.sh {% for db in mariadb_databases %} {{ db.name }} {% endfor %}
+
+
